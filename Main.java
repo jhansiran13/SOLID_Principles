@@ -18,28 +18,32 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // Create members
         Member speakerMember = new Member("S1", "Speaker of AP", "Nominated");
         Member ministerMember = new Member("M1", "IT Minister", "Mangalagiri");
         Member mlaMember = new Member("B1", "Local MLA", "Nellore");
-
+        // Assign roles
         Speaker speaker = new Speaker(speakerMember);
         VotingMember minister = new Minister(ministerMember);
         VotingMember backbencher = new Backbencher(mlaMember);
 
         List<VotingMember> votingMembers = Arrays.asList(minister, backbencher);
         List<Member> allMembers = Arrays.asList(speakerMember, ministerMember, mlaMember);
-
+        // Create bill and sessio
         Bill budgetBill = new Bill("AP‑B001", "Andhra Pradesh Budget Bill");
         Session budgetSession = new Session("Budget Session", LocalDate.now());
-
+        // Initialize services
         NotificationService notificationService = new SmsNotificationService();
         SessionScheduler scheduler = new SessionScheduler(notificationService);
         BillService billService = new BillService();
 
-        scheduler.schedule(budgetSession, allMembers);
-        speaker.startSession(budgetSession);
-        speaker.speakOnBill(budgetBill);
-        billService.debateAndVote(budgetBill, votingMembers);
-        speaker.callForVote(budgetBill);
+        
+        // Workflow
+        scheduler.schedule(budgetSession, allMembers); // Notify members
+        speaker.startSession(budgetSession);           // Speaker starts session
+        speaker.speakOnBill(budgetBill);               // Speaker summarizes bill
+        billService.debateAndVote(budgetBill, votingMembers); // Members debate & vote
+        speaker.callForVote(budgetBill);               // Speaker calls for vote
+
     }
 }
