@@ -1,0 +1,6 @@
+✅ SOLID Principles Applied
+S (Single Responsibility): Each class has one responsibility (e.g., Bill only stores bill info, SessionScheduler only schedules sessions).
+O (Open/Closed): Roles and services can be extended without modifying existing code.
+L (Liskov Substitution): Interfaces (VotingMember, SpeakerRole) allow substituting implementations.
+I (Interface Segregation): Separate interfaces for different roles (Speaker vs VotingMember).
+D (Dependency Inversion): SessionScheduler depends on NotificationService abstraction, not concrete implementation.
